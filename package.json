@@ -1,0 +1,16 @@
+{
+  "name": "instadao",
+  "license": "UNLICENSED",
+  "scripts": {
+    "codegen": "graph codegen",
+    "build": "graph build",
+    "deploy": "graph deploy --node https://api.thegraph.com/deploy/ anoushk1234/instadao",
+    "create-local": "graph create --node http://localhost:8020/ anoushk1234/instadao",
+    "remove-local": "graph remove --node http://localhost:8020/ anoushk1234/instadao",
+    "deploy-local": "graph deploy --node http://localhost:8020/ --ipfs http://localhost:5001 anoushk1234/instadao"
+  },
+  "dependencies": {
+    "@graphprotocol/graph-cli": "0.25.1",
+    "@graphprotocol/graph-ts": "0.24.1"
+  }
+}
