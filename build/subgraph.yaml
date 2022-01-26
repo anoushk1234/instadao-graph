@@ -1,6 +1,6 @@
 specVersion: 0.0.2
 schema:
-  file: ./schema.graphql
+  file: schema.graphql
 dataSources:
   - kind: ethereum
     name: DaoFactory
@@ -17,11 +17,11 @@ dataSources:
         - tokencreated
       abis:
         - name: DaoFactory
-          file: ./abis/DaoFactory.json
+          file: DaoFactory/abis/DaoFactory.json
       eventHandlers:
         - event: tokencreated(address,address)
           handler: handletokencreated
-      file: ./src/mapping.ts
+      file: DaoFactory/DaoFactory.wasm
 templates:
   - kind: ethereum
     name: InstaDao
@@ -38,7 +38,7 @@ templates:
         - Transfer
       abis:
         - name: InstaDao
-          file: ./abis/InstaDao.json
+          file: InstaDao/abis/InstaDao.json
       eventHandlers:
         - event: Approval(indexed address,indexed address,uint256)
           handler: handleApproval
@@ -46,4 +46,4 @@ templates:
           handler: handleOwnershipTransferred
         - event: Transfer(indexed address,indexed address,uint256)
           handler: handleTransfer
-      file: ./src/mapping.ts
+      file: DaoFactory/DaoFactory.wasm
