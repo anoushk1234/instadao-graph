@@ -56,8 +56,8 @@ export function handleTransfer(event: Transfer): void {
 
   // BigInt and BigDecimal math are supported
   entity.count = entity.count + BigInt.fromI32(1);
-  entity.from = event.params.from;
-  entity.to = event.params.to;
+  // entity.from = event.params.from;
+  entity.to = event.params.to.toHexString();
   entity.amt = event.params.value;
   entity.save();
 }

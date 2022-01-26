@@ -4,11 +4,11 @@ schema:
 dataSources:
   - kind: ethereum
     name: DaoFactory
-    network: mumbai
+    network: rinkeby
     source:
-      address: "0xE9F5a8F52ad35a83e8afDc44f08ba9A9DcD9f7Fa"
+      address: "0x2916d25181811929e99a3af12d7f1f2ce5a48de1"
       abi: DaoFactory
-      startBlock: 24285612
+      startBlock: 10059503
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.5
@@ -25,7 +25,7 @@ dataSources:
 templates:
   - kind: ethereum
     name: InstaDao
-    network: mumbai
+    network: rinkeby
     source:
       abi: InstaDao
     mapping:

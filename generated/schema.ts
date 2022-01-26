@@ -81,8 +81,7 @@ export class TokenTransferEntity extends Entity {
     this.set("id", Value.fromString(id));
 
     this.set("count", Value.fromBigInt(BigInt.zero()));
-    this.set("from", Value.fromBytes(Bytes.empty()));
-    this.set("to", Value.fromBytes(Bytes.empty()));
+    this.set("to", Value.fromString(""));
     this.set("amt", Value.fromBigInt(BigInt.zero()));
   }
 
@@ -123,22 +122,13 @@ export class TokenTransferEntity extends Entity {
     this.set("count", Value.fromBigInt(value));
   }
 
-  get from(): Bytes {
-    let value = this.get("from");
-    return value!.toBytes();
-  }
-
-  set from(value: Bytes) {
-    this.set("from", Value.fromBytes(value));
-  }
-
-  get to(): Bytes {
+  get to(): string {
     let value = this.get("to");
-    return value!.toBytes();
+    return value!.toString();
   }
 
-  set to(value: Bytes) {
-    this.set("to", Value.fromBytes(value));
+  set to(value: string) {
+    this.set("to", Value.fromString(value));
   }
 
   get amt(): BigInt {
