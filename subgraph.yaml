@@ -23,7 +23,7 @@ dataSources:
           handler: handletokencreated
       file: ./src/mapping.ts
 templates:
-  - kind: ethereum
+  - kind: ethereum/contract
     name: InstaDao
     network: rinkeby
     source:
@@ -33,17 +33,11 @@ templates:
       apiVersion: 0.0.5
       language: wasm/assemblyscript
       entities:
-        - Approval
-        - OwnershipTransferred
         - Transfer
       abis:
         - name: InstaDao
           file: ./abis/InstaDao.json
       eventHandlers:
-        - event: Approval(indexed address,indexed address,uint256)
-          handler: handleApproval
-        - event: OwnershipTransferred(indexed address,indexed address)
-          handler: handleOwnershipTransferred
         - event: Transfer(indexed address,indexed address,uint256)
           handler: handleTransfer
       file: ./src/mapping.ts
