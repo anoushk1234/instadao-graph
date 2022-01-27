@@ -1,7 +1,7 @@
 import { BigInt } from "@graphprotocol/graph-ts";
 import { DaoFactory, tokencreated } from "../generated/DaoFactory/DaoFactory";
-import { Transfer, MintCall } from "../generated/templates/InstaDao/InstaDao";
-import { TokenEntity, TokenTransferEntity } from "../generated/schema";
+// import { Transfer, MintCall } from "../generated/templates/InstaDao/InstaDao";
+import { TokenEntity } from "../generated/schema";
 
 export function handletokencreated(eventOne: tokencreated): void {
   // Entities can be loaded from the store using a string ID; this ID
@@ -23,6 +23,8 @@ export function handletokencreated(eventOne: tokencreated): void {
   // entityOne fields can be set based on eventOne parameters
   entityOne.tokenaddress = eventOne.params.tokenaddress;
   entityOne.creator = eventOne.params.creator;
+  entityOne.name = eventOne.params.name;
+  entityOne.symbol = eventOne.params.symbol;
 
   // Entities can be written to the store with `.save()`
   entityOne.save();
@@ -46,28 +48,28 @@ export function handletokencreated(eventOne: tokencreated): void {
   // - contract.getContract(...)
 }
 
-export function handleTransfer(eventTwo: Transfer): void {
-  let entityTwo = new TokenTransferEntity(eventTwo.transaction.hash.toHex());
+// export function handleTransfer(eventTwo: Transfer): void {
+//   let entityTwo = new TokenTransferEntity(eventTwo.transaction.hash.toHex());
 
-  if (!entityTwo) {
-    entityTwo = new TokenTransferEntity(eventTwo.transaction.hash.toHex());
-    entityTwo.count = BigInt.fromI32(0);
-  }
-
-  // BigInt and BigDecimal math are supported
-  entityTwo.count = entityTwo.count + BigInt.fromI32(1);
-  // entityTwo.from = eventTwo.params.from;
-  entityTwo.to = eventTwo.params.to.toHexString();
-  entityTwo.amt = eventTwo.params.value;
-  entityTwo.save();
-}
-
-// export function handleMintCall(call: MintCall): void {
-//   let entity = TokenTransferEntity.load(call.transaction.hash.toHexString());
-
-//   if (!entity) {
-//     entity = new TokenTransferEntity(call.transaction.hash.toHexString());
+//   if (!entityTwo) {
+//     entityTwo = new TokenTransferEntity(eventTwo.transaction.hash.toHex());
+//     entityTwo.count = BigInt.fromI32(0);
 //   }
 
-//   entity.save();
+//   // BigInt and BigDecimal math are supported
+//   entityTwo.count = entityTwo.count + BigInt.fromI32(1);
+//   // entityTwo.from = eventTwo.params.from;
+//   entityTwo.to = eventTwo.params.to.toHexString();
+//   entityTwo.amt = eventTwo.params.value;
+//   entityTwo.save();
 // }
+
+// // export function handleMintCall(call: MintCall): void {
+// //   let entity = TokenTransferEntity.load(call.transaction.hash.toHexString());
+
+// //   if (!entity) {
+// //     entity = new TokenTransferEntity(call.transaction.hash.toHexString());
+// //   }
+
+// //   entity.save();
+// // }

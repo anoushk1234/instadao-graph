@@ -6,9 +6,9 @@ dataSources:
     name: DaoFactory
     network: rinkeby
     source:
-      address: "0x2916d25181811929e99a3af12d7f1f2ce5a48de1"
+      address: "0xb98fc4c505f65cfcdc747c6d50cc5d5beb160805"
       abi: DaoFactory
-      startBlock: 10059503
+      startBlock: 10062916
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.5
@@ -19,25 +19,25 @@ dataSources:
         - name: DaoFactory
           file: ./abis/DaoFactory.json
       eventHandlers:
-        - event: tokencreated(address,address)
+        - event: tokencreated(address,address,string,string)
           handler: handletokencreated
       file: ./src/mapping.ts
-templates:
-  - kind: ethereum/contract
-    name: InstaDao
-    network: rinkeby
-    source:
-      abi: InstaDao
-    mapping:
-      kind: ethereum/events
-      apiVersion: 0.0.5
-      language: wasm/assemblyscript
-      entities:
-        - Transfer
-      abis:
-        - name: InstaDao
-          file: ./abis/InstaDao.json
-      eventHandlers:
-        - event: Transfer(indexed address,indexed address,uint256)
-          handler: handleTransfer
-      file: ./src/mapping.ts
+# templates:
+#   - kind: ethereum/contract
+#     name: InstaDao
+#     network: rinkeby
+#     source:
+#       abi: InstaDao
+#     mapping:
+#       kind: ethereum/events
+#       apiVersion: 0.0.5
+#       language: wasm/assemblyscript
+#       entities:
+#         - Transfer
+#       abis:
+#         - name: InstaDao
+#           file: ./abis/InstaDao.json
+#       eventHandlers:
+#         - event: Transfer(indexed address,indexed address,uint256)
+#           handler: handleTransfer
+#       file: ./src/mapping.ts

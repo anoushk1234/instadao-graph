@@ -19,6 +19,8 @@ export class TokenEntity extends Entity {
     this.set("count", Value.fromBigInt(BigInt.zero()));
     this.set("tokenaddress", Value.fromBytes(Bytes.empty()));
     this.set("creator", Value.fromBytes(Bytes.empty()));
+    this.set("name", Value.fromString(""));
+    this.set("symbol", Value.fromString(""));
   }
 
   save(): void {
@@ -73,70 +75,22 @@ export class TokenEntity extends Entity {
   set creator(value: Bytes) {
     this.set("creator", Value.fromBytes(value));
   }
-}
 
-export class TokenTransferEntity extends Entity {
-  constructor(id: string) {
-    super();
-    this.set("id", Value.fromString(id));
-
-    this.set("count", Value.fromBigInt(BigInt.zero()));
-    this.set("to", Value.fromString(""));
-    this.set("amt", Value.fromBigInt(BigInt.zero()));
-  }
-
-  save(): void {
-    let id = this.get("id");
-    assert(id != null, "Cannot save TokenTransferEntity entity without an ID");
-    if (id) {
-      assert(
-        id.kind == ValueKind.STRING,
-        "Cannot save TokenTransferEntity entity with non-string ID. " +
-          'Considering using .toHex() to convert the "id" to a string.'
-      );
-      store.set("TokenTransferEntity", id.toString(), this);
-    }
-  }
-
-  static load(id: string): TokenTransferEntity | null {
-    return changetype<TokenTransferEntity | null>(
-      store.get("TokenTransferEntity", id)
-    );
-  }
-
-  get id(): string {
-    let value = this.get("id");
+  get name(): string {
+    let value = this.get("name");
     return value!.toString();
   }
 
-  set id(value: string) {
-    this.set("id", Value.fromString(value));
+  set name(value: string) {
+    this.set("name", Value.fromString(value));
   }
 
-  get count(): BigInt {
-    let value = this.get("count");
-    return value!.toBigInt();
-  }
-
-  set count(value: BigInt) {
-    this.set("count", Value.fromBigInt(value));
-  }
-
-  get to(): string {
-    let value = this.get("to");
+  get symbol(): string {
+    let value = this.get("symbol");
     return value!.toString();
   }
 
-  set to(value: string) {
-    this.set("to", Value.fromString(value));
-  }
-
-  get amt(): BigInt {
-    let value = this.get("amt");
-    return value!.toBigInt();
-  }
-
-  set amt(value: BigInt) {
-    this.set("amt", Value.fromBigInt(value));
+  set symbol(value: string) {
+    this.set("symbol", Value.fromString(value));
   }
 }

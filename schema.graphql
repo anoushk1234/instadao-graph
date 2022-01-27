@@ -3,12 +3,14 @@ type TokenEntity @entity {
   count: BigInt!
   tokenaddress: Bytes! # address
   creator: Bytes! # address
+  name: String!
+  symbol: String!
 }
 
-type TokenTransferEntity @entity {
-  id: ID!
-  count: BigInt!
-  # from: Bytes! # address
-  to: String! # address
-  amt: BigInt! # address
-}
+# type TokenTransferEntity @entity {
+#   id: ID!
+#   count: BigInt!
+#   # from: Bytes! # address
+#   to: String! # address
+#   amt: BigInt! # address
+# }

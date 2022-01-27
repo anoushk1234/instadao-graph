@@ -1,28 +1,5 @@
 [
   {
-    "inputs": [
-      {
-        "internalType": "uint256",
-        "name": "supply",
-        "type": "uint256"
-      },
-      {
-        "internalType": "uint256",
-        "name": "amt",
-        "type": "uint256"
-      },
-      {
-        "internalType": "uint256",
-        "name": "deci",
-        "type": "uint256"
-      }
-    ],
-    "name": "create",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
     "anonymous": false,
     "inputs": [
       {
@@ -36,6 +13,18 @@
         "internalType": "address",
         "name": "creator",
         "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "string",
+        "name": "name",
+        "type": "string"
+      },
+      {
+        "indexed": false,
+        "internalType": "string",
+        "name": "symbol",
+        "type": "string"
       }
     ],
     "name": "tokencreated",
@@ -58,6 +47,39 @@
       }
     ],
     "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "supply",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "amt",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "deci",
+        "type": "uint256"
+      },
+      {
+        "internalType": "string",
+        "name": "name",
+        "type": "string"
+      },
+      {
+        "internalType": "string",
+        "name": "symbol",
+        "type": "string"
+      }
+    ],
+    "name": "create",
+    "outputs": [],
+    "stateMutability": "nonpayable",
     "type": "function"
   },
   {
