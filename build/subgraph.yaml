@@ -6,9 +6,9 @@ dataSources:
     name: DaoFactory
     network: rinkeby
     source:
-      address: "0xb98fc4c505f65cfcdc747c6d50cc5d5beb160805"
+      address: "0xe7369ddfcf05a4e44c13ec7ab1b4fa1856919a68"
       abi: DaoFactory
-      startBlock: 10062916
+      startBlock: 10068890
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.5
@@ -21,4 +21,23 @@ dataSources:
       eventHandlers:
         - event: tokencreated(address,address,string,string)
           handler: handletokencreated
+      file: DaoFactory/DaoFactory.wasm
+templates:
+  - kind: ethereum/contract
+    name: InstaDao
+    network: rinkeby
+    source:
+      abi: InstaDao
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.5
+      language: wasm/assemblyscript
+      entities:
+        - Transfer
+      abis:
+        - name: InstaDao
+          file: InstaDao/abis/InstaDao.json
+      eventHandlers:
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleTransfer
       file: DaoFactory/DaoFactory.wasm

@@ -44,40 +44,6 @@ export class DaoFactory extends ethereum.SmartContract {
   static bind(address: Address): DaoFactory {
     return new DaoFactory("DaoFactory", address);
   }
-
-  children(param0: Address): Address {
-    let result = super.call("children", "children(address):(address)", [
-      ethereum.Value.fromAddress(param0)
-    ]);
-
-    return result[0].toAddress();
-  }
-
-  try_children(param0: Address): ethereum.CallResult<Address> {
-    let result = super.tryCall("children", "children(address):(address)", [
-      ethereum.Value.fromAddress(param0)
-    ]);
-    if (result.reverted) {
-      return new ethereum.CallResult();
-    }
-    let value = result.value;
-    return ethereum.CallResult.fromValue(value[0].toAddress());
-  }
-
-  getContract(): Address {
-    let result = super.call("getContract", "getContract():(address)", []);
-
-    return result[0].toAddress();
-  }
-
-  try_getContract(): ethereum.CallResult<Address> {
-    let result = super.tryCall("getContract", "getContract():(address)", []);
-    if (result.reverted) {
-      return new ethereum.CallResult();
-    }
-    let value = result.value;
-    return ethereum.CallResult.fromValue(value[0].toAddress());
-  }
 }
 
 export class CreateCall extends ethereum.Call {

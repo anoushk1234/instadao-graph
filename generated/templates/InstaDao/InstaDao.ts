@@ -89,150 +89,6 @@ export class InstaDao extends ethereum.SmartContract {
     return new InstaDao("InstaDao", address);
   }
 
-  approve(spender: Address, amount: BigInt): boolean {
-    let result = super.call("approve", "approve(address,uint256):(bool)", [
-      ethereum.Value.fromAddress(spender),
-      ethereum.Value.fromUnsignedBigInt(amount)
-    ]);
-
-    return result[0].toBoolean();
-  }
-
-  try_approve(spender: Address, amount: BigInt): ethereum.CallResult<boolean> {
-    let result = super.tryCall("approve", "approve(address,uint256):(bool)", [
-      ethereum.Value.fromAddress(spender),
-      ethereum.Value.fromUnsignedBigInt(amount)
-    ]);
-    if (result.reverted) {
-      return new ethereum.CallResult();
-    }
-    let value = result.value;
-    return ethereum.CallResult.fromValue(value[0].toBoolean());
-  }
-
-  decreaseAllowance(spender: Address, subtractedValue: BigInt): boolean {
-    let result = super.call(
-      "decreaseAllowance",
-      "decreaseAllowance(address,uint256):(bool)",
-      [
-        ethereum.Value.fromAddress(spender),
-        ethereum.Value.fromUnsignedBigInt(subtractedValue)
-      ]
-    );
-
-    return result[0].toBoolean();
-  }
-
-  try_decreaseAllowance(
-    spender: Address,
-    subtractedValue: BigInt
-  ): ethereum.CallResult<boolean> {
-    let result = super.tryCall(
-      "decreaseAllowance",
-      "decreaseAllowance(address,uint256):(bool)",
-      [
-        ethereum.Value.fromAddress(spender),
-        ethereum.Value.fromUnsignedBigInt(subtractedValue)
-      ]
-    );
-    if (result.reverted) {
-      return new ethereum.CallResult();
-    }
-    let value = result.value;
-    return ethereum.CallResult.fromValue(value[0].toBoolean());
-  }
-
-  increaseAllowance(spender: Address, addedValue: BigInt): boolean {
-    let result = super.call(
-      "increaseAllowance",
-      "increaseAllowance(address,uint256):(bool)",
-      [
-        ethereum.Value.fromAddress(spender),
-        ethereum.Value.fromUnsignedBigInt(addedValue)
-      ]
-    );
-
-    return result[0].toBoolean();
-  }
-
-  try_increaseAllowance(
-    spender: Address,
-    addedValue: BigInt
-  ): ethereum.CallResult<boolean> {
-    let result = super.tryCall(
-      "increaseAllowance",
-      "increaseAllowance(address,uint256):(bool)",
-      [
-        ethereum.Value.fromAddress(spender),
-        ethereum.Value.fromUnsignedBigInt(addedValue)
-      ]
-    );
-    if (result.reverted) {
-      return new ethereum.CallResult();
-    }
-    let value = result.value;
-    return ethereum.CallResult.fromValue(value[0].toBoolean());
-  }
-
-  transfer(recipient: Address, amount: BigInt): boolean {
-    let result = super.call("transfer", "transfer(address,uint256):(bool)", [
-      ethereum.Value.fromAddress(recipient),
-      ethereum.Value.fromUnsignedBigInt(amount)
-    ]);
-
-    return result[0].toBoolean();
-  }
-
-  try_transfer(
-    recipient: Address,
-    amount: BigInt
-  ): ethereum.CallResult<boolean> {
-    let result = super.tryCall("transfer", "transfer(address,uint256):(bool)", [
-      ethereum.Value.fromAddress(recipient),
-      ethereum.Value.fromUnsignedBigInt(amount)
-    ]);
-    if (result.reverted) {
-      return new ethereum.CallResult();
-    }
-    let value = result.value;
-    return ethereum.CallResult.fromValue(value[0].toBoolean());
-  }
-
-  transferFrom(sender: Address, recipient: Address, amount: BigInt): boolean {
-    let result = super.call(
-      "transferFrom",
-      "transferFrom(address,address,uint256):(bool)",
-      [
-        ethereum.Value.fromAddress(sender),
-        ethereum.Value.fromAddress(recipient),
-        ethereum.Value.fromUnsignedBigInt(amount)
-      ]
-    );
-
-    return result[0].toBoolean();
-  }
-
-  try_transferFrom(
-    sender: Address,
-    recipient: Address,
-    amount: BigInt
-  ): ethereum.CallResult<boolean> {
-    let result = super.tryCall(
-      "transferFrom",
-      "transferFrom(address,address,uint256):(bool)",
-      [
-        ethereum.Value.fromAddress(sender),
-        ethereum.Value.fromAddress(recipient),
-        ethereum.Value.fromUnsignedBigInt(amount)
-      ]
-    );
-    if (result.reverted) {
-      return new ethereum.CallResult();
-    }
-    let value = result.value;
-    return ethereum.CallResult.fromValue(value[0].toBoolean());
-  }
-
   allowance(owner: Address, spender: Address): BigInt {
     let result = super.call(
       "allowance",
@@ -254,6 +110,27 @@ export class InstaDao extends ethereum.SmartContract {
     }
     let value = result.value;
     return ethereum.CallResult.fromValue(value[0].toBigInt());
+  }
+
+  approve(spender: Address, amount: BigInt): boolean {
+    let result = super.call("approve", "approve(address,uint256):(bool)", [
+      ethereum.Value.fromAddress(spender),
+      ethereum.Value.fromUnsignedBigInt(amount)
+    ]);
+
+    return result[0].toBoolean();
+  }
+
+  try_approve(spender: Address, amount: BigInt): ethereum.CallResult<boolean> {
+    let result = super.tryCall("approve", "approve(address,uint256):(bool)", [
+      ethereum.Value.fromAddress(spender),
+      ethereum.Value.fromUnsignedBigInt(amount)
+    ]);
+    if (result.reverted) {
+      return new ethereum.CallResult();
+    }
+    let value = result.value;
+    return ethereum.CallResult.fromValue(value[0].toBoolean());
   }
 
   balanceOf(account: Address): BigInt {
@@ -290,6 +167,38 @@ export class InstaDao extends ethereum.SmartContract {
     return ethereum.CallResult.fromValue(value[0].toI32());
   }
 
+  decreaseAllowance(spender: Address, subtractedValue: BigInt): boolean {
+    let result = super.call(
+      "decreaseAllowance",
+      "decreaseAllowance(address,uint256):(bool)",
+      [
+        ethereum.Value.fromAddress(spender),
+        ethereum.Value.fromUnsignedBigInt(subtractedValue)
+      ]
+    );
+
+    return result[0].toBoolean();
+  }
+
+  try_decreaseAllowance(
+    spender: Address,
+    subtractedValue: BigInt
+  ): ethereum.CallResult<boolean> {
+    let result = super.tryCall(
+      "decreaseAllowance",
+      "decreaseAllowance(address,uint256):(bool)",
+      [
+        ethereum.Value.fromAddress(spender),
+        ethereum.Value.fromUnsignedBigInt(subtractedValue)
+      ]
+    );
+    if (result.reverted) {
+      return new ethereum.CallResult();
+    }
+    let value = result.value;
+    return ethereum.CallResult.fromValue(value[0].toBoolean());
+  }
+
   getTotalSupply(): BigInt {
     let result = super.call("getTotalSupply", "getTotalSupply():(uint256)", []);
 
@@ -307,6 +216,38 @@ export class InstaDao extends ethereum.SmartContract {
     }
     let value = result.value;
     return ethereum.CallResult.fromValue(value[0].toBigInt());
+  }
+
+  increaseAllowance(spender: Address, addedValue: BigInt): boolean {
+    let result = super.call(
+      "increaseAllowance",
+      "increaseAllowance(address,uint256):(bool)",
+      [
+        ethereum.Value.fromAddress(spender),
+        ethereum.Value.fromUnsignedBigInt(addedValue)
+      ]
+    );
+
+    return result[0].toBoolean();
+  }
+
+  try_increaseAllowance(
+    spender: Address,
+    addedValue: BigInt
+  ): ethereum.CallResult<boolean> {
+    let result = super.tryCall(
+      "increaseAllowance",
+      "increaseAllowance(address,uint256):(bool)",
+      [
+        ethereum.Value.fromAddress(spender),
+        ethereum.Value.fromUnsignedBigInt(addedValue)
+      ]
+    );
+    if (result.reverted) {
+      return new ethereum.CallResult();
+    }
+    let value = result.value;
+    return ethereum.CallResult.fromValue(value[0].toBoolean());
   }
 
   name(): string {
@@ -368,6 +309,65 @@ export class InstaDao extends ethereum.SmartContract {
     let value = result.value;
     return ethereum.CallResult.fromValue(value[0].toBigInt());
   }
+
+  transfer(recipient: Address, amount: BigInt): boolean {
+    let result = super.call("transfer", "transfer(address,uint256):(bool)", [
+      ethereum.Value.fromAddress(recipient),
+      ethereum.Value.fromUnsignedBigInt(amount)
+    ]);
+
+    return result[0].toBoolean();
+  }
+
+  try_transfer(
+    recipient: Address,
+    amount: BigInt
+  ): ethereum.CallResult<boolean> {
+    let result = super.tryCall("transfer", "transfer(address,uint256):(bool)", [
+      ethereum.Value.fromAddress(recipient),
+      ethereum.Value.fromUnsignedBigInt(amount)
+    ]);
+    if (result.reverted) {
+      return new ethereum.CallResult();
+    }
+    let value = result.value;
+    return ethereum.CallResult.fromValue(value[0].toBoolean());
+  }
+
+  transferFrom(sender: Address, recipient: Address, amount: BigInt): boolean {
+    let result = super.call(
+      "transferFrom",
+      "transferFrom(address,address,uint256):(bool)",
+      [
+        ethereum.Value.fromAddress(sender),
+        ethereum.Value.fromAddress(recipient),
+        ethereum.Value.fromUnsignedBigInt(amount)
+      ]
+    );
+
+    return result[0].toBoolean();
+  }
+
+  try_transferFrom(
+    sender: Address,
+    recipient: Address,
+    amount: BigInt
+  ): ethereum.CallResult<boolean> {
+    let result = super.tryCall(
+      "transferFrom",
+      "transferFrom(address,address,uint256):(bool)",
+      [
+        ethereum.Value.fromAddress(sender),
+        ethereum.Value.fromAddress(recipient),
+        ethereum.Value.fromUnsignedBigInt(amount)
+      ]
+    );
+    if (result.reverted) {
+      return new ethereum.CallResult();
+    }
+    let value = result.value;
+    return ethereum.CallResult.fromValue(value[0].toBoolean());
+  }
 }
 
 export class ConstructorCall extends ethereum.Call {
@@ -397,6 +397,14 @@ export class ConstructorCall__Inputs {
 
   get _deci(): BigInt {
     return this._call.inputValues[2].value.toBigInt();
+  }
+
+  get name(): string {
+    return this._call.inputValues[3].value.toString();
+  }
+
+  get symbol(): string {
+    return this._call.inputValues[4].value.toString();
   }
 }
 
