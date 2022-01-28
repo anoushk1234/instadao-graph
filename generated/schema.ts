@@ -21,6 +21,8 @@ export class TokenEntity extends Entity {
     this.set("creator", Value.fromBytes(Bytes.empty()));
     this.set("name", Value.fromString(""));
     this.set("symbol", Value.fromString(""));
+    this.set("decimals", Value.fromBigInt(BigInt.zero()));
+    this.set("metadata", Value.fromString(""));
   }
 
   save(): void {
@@ -92,6 +94,24 @@ export class TokenEntity extends Entity {
 
   set symbol(value: string) {
     this.set("symbol", Value.fromString(value));
+  }
+
+  get decimals(): BigInt {
+    let value = this.get("decimals");
+    return value!.toBigInt();
+  }
+
+  set decimals(value: BigInt) {
+    this.set("decimals", Value.fromBigInt(value));
+  }
+
+  get metadata(): string {
+    let value = this.get("metadata");
+    return value!.toString();
+  }
+
+  set metadata(value: string) {
+    this.set("metadata", Value.fromString(value));
   }
 }
 

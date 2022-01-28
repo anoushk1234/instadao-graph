@@ -5,6 +5,8 @@ type TokenEntity @entity {
   creator: Bytes! # address
   name: String!
   symbol: String!
+  decimals: BigInt!
+  metadata: String!
 }
 
 type TokenTransferEntity @entity {

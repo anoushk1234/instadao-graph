@@ -38,6 +38,14 @@ export class tokencreated__Params {
   get symbol(): string {
     return this._event.parameters[3].value.toString();
   }
+
+  get deci(): BigInt {
+    return this._event.parameters[4].value.toBigInt();
+  }
+
+  get metadata(): string {
+    return this._event.parameters[5].value.toString();
+  }
 }
 
 export class DaoFactory extends ethereum.SmartContract {
@@ -81,6 +89,10 @@ export class CreateCall__Inputs {
 
   get symbol(): string {
     return this._call.inputValues[4].value.toString();
+  }
+
+  get metadata(): string {
+    return this._call.inputValues[5].value.toString();
   }
 }
 

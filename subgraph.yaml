@@ -6,9 +6,9 @@ dataSources:
     name: DaoFactory
     network: rinkeby
     source:
-      address: "0xe7369ddfcf05a4e44c13ec7ab1b4fa1856919a68"
+      address: "0x30C02d6099b10A868a8EBA3Bec2Ef92FfA223b60"
       abi: DaoFactory
-      startBlock: 10068890
+      startBlock: 10070994
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.5
@@ -19,7 +19,7 @@ dataSources:
         - name: DaoFactory
           file: ./abis/DaoFactory.json
       eventHandlers:
-        - event: tokencreated(address,address,string,string)
+        - event: tokencreated(address,address,string,string,uint256,string)
           handler: handletokencreated
       file: ./src/mapping.ts
 templates:
