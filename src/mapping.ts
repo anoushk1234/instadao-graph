@@ -27,6 +27,7 @@ export function handletokencreated(eventOne: tokencreated): void {
   entityOne.symbol = eventOne.params.symbol;
   entityOne.decimals = eventOne.params.deci;
   entityOne.metadata = eventOne.params.metadata;
+  entityOne.totalSupply = eventOne.params.totalSupply;
   InstaDao.create(eventOne.params.tokenaddress);
   // Entities can be written to the store with `.save()`
   entityOne.save();
@@ -51,10 +52,18 @@ export function handletokencreated(eventOne: tokencreated): void {
 }
 
 export function handleTransfer(eventTwo: Transfer): void {
-  let entityTwo = TokenTransferEntity.load(eventTwo.transaction.hash.toHex());
+  let entityTwo = TokenTransferEntity.load(
+    eventTwo.address.toHexString() +
+      "|" +
+      eventTwo.transaction.hash.toHexString()
+  );
 
   if (!entityTwo) {
-    entityTwo = new TokenTransferEntity(eventTwo.transaction.hash.toHex());
+    entityTwo = new TokenTransferEntity(
+      eventTwo.address.toHexString() +
+        "|" +
+        eventTwo.transaction.hash.toHexString()
+    );
     entityTwo.count = BigInt.fromI32(0);
   }
 

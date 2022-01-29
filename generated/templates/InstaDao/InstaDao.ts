@@ -199,25 +199,6 @@ export class InstaDao extends ethereum.SmartContract {
     return ethereum.CallResult.fromValue(value[0].toBoolean());
   }
 
-  getTotalSupply(): BigInt {
-    let result = super.call("getTotalSupply", "getTotalSupply():(uint256)", []);
-
-    return result[0].toBigInt();
-  }
-
-  try_getTotalSupply(): ethereum.CallResult<BigInt> {
-    let result = super.tryCall(
-      "getTotalSupply",
-      "getTotalSupply():(uint256)",
-      []
-    );
-    if (result.reverted) {
-      return new ethereum.CallResult();
-    }
-    let value = result.value;
-    return ethereum.CallResult.fromValue(value[0].toBigInt());
-  }
-
   increaseAllowance(spender: Address, addedValue: BigInt): boolean {
     let result = super.call(
       "increaseAllowance",

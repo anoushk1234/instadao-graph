@@ -23,6 +23,7 @@ export class TokenEntity extends Entity {
     this.set("symbol", Value.fromString(""));
     this.set("decimals", Value.fromBigInt(BigInt.zero()));
     this.set("metadata", Value.fromString(""));
+    this.set("totalSupply", Value.fromBigInt(BigInt.zero()));
   }
 
   save(): void {
@@ -112,6 +113,15 @@ export class TokenEntity extends Entity {
 
   set metadata(value: string) {
     this.set("metadata", Value.fromString(value));
+  }
+
+  get totalSupply(): BigInt {
+    let value = this.get("totalSupply");
+    return value!.toBigInt();
+  }
+
+  set totalSupply(value: BigInt) {
+    this.set("totalSupply", Value.fromBigInt(value));
   }
 }
 

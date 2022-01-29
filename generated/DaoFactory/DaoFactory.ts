@@ -46,6 +46,10 @@ export class tokencreated__Params {
   get metadata(): string {
     return this._event.parameters[5].value.toString();
   }
+
+  get totalSupply(): BigInt {
+    return this._event.parameters[6].value.toBigInt();
+  }
 }
 
 export class DaoFactory extends ethereum.SmartContract {
