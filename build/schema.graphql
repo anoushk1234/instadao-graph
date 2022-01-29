@@ -8,6 +8,7 @@ type TokenEntity @entity {
   decimals: BigInt!
   metadata: String!
   totalSupply: BigInt!
+  ensName: String!
 }
 
 type TokenTransferEntity @entity {

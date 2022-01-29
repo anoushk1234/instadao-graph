@@ -43,6 +43,12 @@
         "internalType": "uint256",
         "name": "totalSupply",
         "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "string",
+        "name": "ens",
+        "type": "string"
       }
     ],
     "name": "tokencreated",
@@ -78,6 +84,11 @@
       {
         "internalType": "string",
         "name": "metadata",
+        "type": "string"
+      },
+      {
+        "internalType": "string",
+        "name": "ens",
         "type": "string"
       }
     ],

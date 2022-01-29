@@ -24,6 +24,7 @@ export class TokenEntity extends Entity {
     this.set("decimals", Value.fromBigInt(BigInt.zero()));
     this.set("metadata", Value.fromString(""));
     this.set("totalSupply", Value.fromBigInt(BigInt.zero()));
+    this.set("ensName", Value.fromString(""));
   }
 
   save(): void {
@@ -122,6 +123,15 @@ export class TokenEntity extends Entity {
 
   set totalSupply(value: BigInt) {
     this.set("totalSupply", Value.fromBigInt(value));
+  }
+
+  get ensName(): string {
+    let value = this.get("ensName");
+    return value!.toString();
+  }
+
+  set ensName(value: string) {
+    this.set("ensName", Value.fromString(value));
   }
 }
 

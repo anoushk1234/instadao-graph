@@ -28,6 +28,7 @@ export function handletokencreated(eventOne: tokencreated): void {
   entityOne.decimals = eventOne.params.deci;
   entityOne.metadata = eventOne.params.metadata;
   entityOne.totalSupply = eventOne.params.totalSupply;
+  entityOne.ensName = eventOne.params.ens;
   InstaDao.create(eventOne.params.tokenaddress);
   // Entities can be written to the store with `.save()`
   entityOne.save();

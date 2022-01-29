@@ -50,6 +50,10 @@ export class tokencreated__Params {
   get totalSupply(): BigInt {
     return this._event.parameters[6].value.toBigInt();
   }
+
+  get ens(): string {
+    return this._event.parameters[7].value.toString();
+  }
 }
 
 export class DaoFactory extends ethereum.SmartContract {
@@ -63,18 +67,20 @@ export class DaoFactory extends ethereum.SmartContract {
     deci: BigInt,
     name: string,
     symbol: string,
-    metadata: string
+    metadata: string,
+    ens: string
   ): Address {
     let result = super.call(
       "create",
-      "create(uint256,uint256,uint256,string,string,string):(address)",
+      "create(uint256,uint256,uint256,string,string,string,string):(address)",
       [
         ethereum.Value.fromUnsignedBigInt(supply),
         ethereum.Value.fromUnsignedBigInt(amt),
         ethereum.Value.fromUnsignedBigInt(deci),
         ethereum.Value.fromString(name),
         ethereum.Value.fromString(symbol),
-        ethereum.Value.fromString(metadata)
+        ethereum.Value.fromString(metadata),
+        ethereum.Value.fromString(ens)
       ]
     );
 
@@ -87,18 +93,20 @@ export class DaoFactory extends ethereum.SmartContract {
     deci: BigInt,
     name: string,
     symbol: string,
-    metadata: string
+    metadata: string,
+    ens: string
   ): ethereum.CallResult<Address> {
     let result = super.tryCall(
       "create",
-      "create(uint256,uint256,uint256,string,string,string):(address)",
+      "create(uint256,uint256,uint256,string,string,string,string):(address)",
       [
         ethereum.Value.fromUnsignedBigInt(supply),
         ethereum.Value.fromUnsignedBigInt(amt),
         ethereum.Value.fromUnsignedBigInt(deci),
         ethereum.Value.fromString(name),
         ethereum.Value.fromString(symbol),
-        ethereum.Value.fromString(metadata)
+        ethereum.Value.fromString(metadata),
+        ethereum.Value.fromString(ens)
       ]
     );
     if (result.reverted) {
@@ -148,6 +156,10 @@ export class CreateCall__Inputs {
 
   get metadata(): string {
     return this._call.inputValues[5].value.toString();
+  }
+
+  get ens(): string {
+    return this._call.inputValues[6].value.toString();
   }
 }
 
