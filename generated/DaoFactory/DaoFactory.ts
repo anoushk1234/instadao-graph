@@ -52,6 +52,57 @@ export class DaoFactory extends ethereum.SmartContract {
   static bind(address: Address): DaoFactory {
     return new DaoFactory("DaoFactory", address);
   }
+
+  create(
+    supply: BigInt,
+    amt: BigInt,
+    deci: BigInt,
+    name: string,
+    symbol: string,
+    metadata: string
+  ): Address {
+    let result = super.call(
+      "create",
+      "create(uint256,uint256,uint256,string,string,string):(address)",
+      [
+        ethereum.Value.fromUnsignedBigInt(supply),
+        ethereum.Value.fromUnsignedBigInt(amt),
+        ethereum.Value.fromUnsignedBigInt(deci),
+        ethereum.Value.fromString(name),
+        ethereum.Value.fromString(symbol),
+        ethereum.Value.fromString(metadata)
+      ]
+    );
+
+    return result[0].toAddress();
+  }
+
+  try_create(
+    supply: BigInt,
+    amt: BigInt,
+    deci: BigInt,
+    name: string,
+    symbol: string,
+    metadata: string
+  ): ethereum.CallResult<Address> {
+    let result = super.tryCall(
+      "create",
+      "create(uint256,uint256,uint256,string,string,string):(address)",
+      [
+        ethereum.Value.fromUnsignedBigInt(supply),
+        ethereum.Value.fromUnsignedBigInt(amt),
+        ethereum.Value.fromUnsignedBigInt(deci),
+        ethereum.Value.fromString(name),
+        ethereum.Value.fromString(symbol),
+        ethereum.Value.fromString(metadata)
+      ]
+    );
+    if (result.reverted) {
+      return new ethereum.CallResult();
+    }
+    let value = result.value;
+    return ethereum.CallResult.fromValue(value[0].toAddress());
+  }
 }
 
 export class CreateCall extends ethereum.Call {
@@ -101,5 +152,9 @@ export class CreateCall__Outputs {
 
   constructor(call: CreateCall) {
     this._call = call;
+  }
+
+  get value0(): Address {
+    return this._call.outputValues[0].value.toAddress();
   }
 }
