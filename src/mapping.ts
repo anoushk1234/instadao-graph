@@ -1,8 +1,15 @@
 import { BigInt } from "@graphprotocol/graph-ts";
 import { tokencreated } from "../generated/DaoFactory/DaoFactory";
 import { InstaDao } from "../generated/templates";
-import { TokenEntity, TokenTransferEntity } from "../generated/schema";
-import { Transfer } from "../generated/templates/InstaDao/InstaDao";
+import {
+  TokenEntity,
+  TokenTransferEntity,
+  ManualTransferEntity,
+} from "../generated/schema";
+import {
+  Transfer,
+  ManualTransfer,
+} from "../generated/templates/InstaDao/InstaDao";
 export function handletokencreated(eventOne: tokencreated): void {
   // Entities can be loaded from the store using a string ID; this ID
   // needs to be unique across all entities of the same type
@@ -54,16 +61,16 @@ export function handletokencreated(eventOne: tokencreated): void {
 
 export function handleTransfer(eventTwo: Transfer): void {
   let entityTwo = TokenTransferEntity.load(
-    eventTwo.address.toHexString() +
-      "|" +
-      eventTwo.transaction.hash.toHexString()
+    // eventTwo.address.toHexString() +
+    //   "|" +
+    eventTwo.transaction.hash.toHexString()
   );
 
   if (!entityTwo) {
     entityTwo = new TokenTransferEntity(
-      eventTwo.address.toHexString() +
-        "|" +
-        eventTwo.transaction.hash.toHexString()
+      // eventTwo.address.toHexString() +
+      //   "|" +
+      eventTwo.transaction.hash.toHexString()
     );
     entityTwo.count = BigInt.fromI32(0);
   }
@@ -71,17 +78,23 @@ export function handleTransfer(eventTwo: Transfer): void {
   // BigInt and BigDecimal math are supported
   entityTwo.count = entityTwo.count + BigInt.fromI32(1);
   // entityTwo.from = eventTwo.params.from;
+  entityTwo.tokenaddress = eventTwo.address.toHexString();
   entityTwo.to = eventTwo.params.to.toHexString();
   entityTwo.amt = eventTwo.params.value;
   entityTwo.save();
 }
 
-// export function handleMintCall(call: MintCall): void {
-//   let entity = TokenTransferEntity.load(call.transaction.hash.toHexString());
+export function handleManualTransfer(event: ManualTransfer): void {
+  let entity = ManualTransferEntity.load(event.transaction.hash.toHexString());
 
-//   if (!entity) {
-//     entity = new TokenTransferEntity(call.transaction.hash.toHexString());
-//   }
-
-//   entity.save();
-// }
+  if (!entity) {
+    entity = new ManualTransferEntity(event.transaction.hash.toHexString());
+    entity.count = BigInt.fromI32(0);
+  }
+  entity.count = entity.count + BigInt.fromI32(1);
+  entity.from = event.params.from.toHexString();
+  entity.to = event.params.to.toHexString();
+  entity.amt = event.params.amt;
+  entity.tokenaddress = event.params.tokenaddress.toHexString();
+  entity.save();
+}

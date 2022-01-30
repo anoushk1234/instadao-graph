@@ -141,6 +141,7 @@ export class TokenTransferEntity extends Entity {
     this.set("id", Value.fromString(id));
 
     this.set("count", Value.fromBigInt(BigInt.zero()));
+    this.set("tokenaddress", Value.fromString(""));
     this.set("to", Value.fromString(""));
     this.set("amt", Value.fromBigInt(BigInt.zero()));
   }
@@ -182,6 +183,15 @@ export class TokenTransferEntity extends Entity {
     this.set("count", Value.fromBigInt(value));
   }
 
+  get tokenaddress(): string {
+    let value = this.get("tokenaddress");
+    return value!.toString();
+  }
+
+  set tokenaddress(value: string) {
+    this.set("tokenaddress", Value.fromString(value));
+  }
+
   get to(): string {
     let value = this.get("to");
     return value!.toString();
@@ -189,6 +199,92 @@ export class TokenTransferEntity extends Entity {
 
   set to(value: string) {
     this.set("to", Value.fromString(value));
+  }
+
+  get amt(): BigInt {
+    let value = this.get("amt");
+    return value!.toBigInt();
+  }
+
+  set amt(value: BigInt) {
+    this.set("amt", Value.fromBigInt(value));
+  }
+}
+
+export class ManualTransferEntity extends Entity {
+  constructor(id: string) {
+    super();
+    this.set("id", Value.fromString(id));
+
+    this.set("count", Value.fromBigInt(BigInt.zero()));
+    this.set("from", Value.fromString(""));
+    this.set("to", Value.fromString(""));
+    this.set("tokenaddress", Value.fromString(""));
+    this.set("amt", Value.fromBigInt(BigInt.zero()));
+  }
+
+  save(): void {
+    let id = this.get("id");
+    assert(id != null, "Cannot save ManualTransferEntity entity without an ID");
+    if (id) {
+      assert(
+        id.kind == ValueKind.STRING,
+        "Cannot save ManualTransferEntity entity with non-string ID. " +
+          'Considering using .toHex() to convert the "id" to a string.'
+      );
+      store.set("ManualTransferEntity", id.toString(), this);
+    }
+  }
+
+  static load(id: string): ManualTransferEntity | null {
+    return changetype<ManualTransferEntity | null>(
+      store.get("ManualTransferEntity", id)
+    );
+  }
+
+  get id(): string {
+    let value = this.get("id");
+    return value!.toString();
+  }
+
+  set id(value: string) {
+    this.set("id", Value.fromString(value));
+  }
+
+  get count(): BigInt {
+    let value = this.get("count");
+    return value!.toBigInt();
+  }
+
+  set count(value: BigInt) {
+    this.set("count", Value.fromBigInt(value));
+  }
+
+  get from(): string {
+    let value = this.get("from");
+    return value!.toString();
+  }
+
+  set from(value: string) {
+    this.set("from", Value.fromString(value));
+  }
+
+  get to(): string {
+    let value = this.get("to");
+    return value!.toString();
+  }
+
+  set to(value: string) {
+    this.set("to", Value.fromString(value));
+  }
+
+  get tokenaddress(): string {
+    let value = this.get("tokenaddress");
+    return value!.toString();
+  }
+
+  set tokenaddress(value: string) {
+    this.set("tokenaddress", Value.fromString(value));
   }
 
   get amt(): BigInt {

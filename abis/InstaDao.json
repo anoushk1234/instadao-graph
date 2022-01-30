@@ -25,6 +25,11 @@
                 "internalType": "string",
                 "name": "symbol",
                 "type": "string"
+            },
+            {
+                "internalType": "address",
+                "name": "creator",
+                "type": "address"
             }
         ],
         "stateMutability": "nonpayable",
@@ -53,6 +58,37 @@
             }
         ],
         "name": "Approval",
+        "type": "event"
+    },
+    {
+        "anonymous": false,
+        "inputs": [
+            {
+                "indexed": false,
+                "internalType": "address",
+                "name": "from",
+                "type": "address"
+            },
+            {
+                "indexed": false,
+                "internalType": "address",
+                "name": "to",
+                "type": "address"
+            },
+            {
+                "indexed": false,
+                "internalType": "address",
+                "name": "tokenaddress",
+                "type": "address"
+            },
+            {
+                "indexed": false,
+                "internalType": "uint256",
+                "name": "amt",
+                "type": "uint256"
+            }
+        ],
+        "name": "ManualTransfer",
         "type": "event"
     },
     {

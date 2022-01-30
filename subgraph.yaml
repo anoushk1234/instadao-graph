@@ -6,9 +6,9 @@ dataSources:
     name: DaoFactory
     network: rinkeby
     source:
-      address: "0x2bBF7B77585af7e3F2a0542944e49B92186D0c29"
+      address: "0xe92FB39D0f3c83800232b331A9f7693F36F86C1C"
       abi: DaoFactory
-      startBlock: 10075810
+      startBlock: 10081298
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.5
@@ -40,4 +40,6 @@ templates:
       eventHandlers:
         - event: Transfer(indexed address,indexed address,uint256)
           handler: handleTransfer
+        - event: ManualTransfer(address,address,address,uint256)
+          handler: handleManualTransfer
       file: ./src/mapping.ts

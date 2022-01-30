@@ -15,6 +15,15 @@ type TokenTransferEntity @entity {
   id: ID!
   count: BigInt!
   # from: Bytes! # address
+  tokenaddress: String! # address
   to: String! # address
+  amt: BigInt! # address
+}
+type ManualTransferEntity @entity {
+  id: ID!
+  count: BigInt!
+  from: String! # address
+  to: String! # address
+  tokenaddress: String! # address
   amt: BigInt! # address
 }

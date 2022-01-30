@@ -36,6 +36,36 @@ export class Approval__Params {
   }
 }
 
+export class ManualTransfer extends ethereum.Event {
+  get params(): ManualTransfer__Params {
+    return new ManualTransfer__Params(this);
+  }
+}
+
+export class ManualTransfer__Params {
+  _event: ManualTransfer;
+
+  constructor(event: ManualTransfer) {
+    this._event = event;
+  }
+
+  get from(): Address {
+    return this._event.parameters[0].value.toAddress();
+  }
+
+  get to(): Address {
+    return this._event.parameters[1].value.toAddress();
+  }
+
+  get tokenaddress(): Address {
+    return this._event.parameters[2].value.toAddress();
+  }
+
+  get amt(): BigInt {
+    return this._event.parameters[3].value.toBigInt();
+  }
+}
+
 export class OwnershipTransferred extends ethereum.Event {
   get params(): OwnershipTransferred__Params {
     return new OwnershipTransferred__Params(this);
@@ -386,6 +416,10 @@ export class ConstructorCall__Inputs {
 
   get symbol(): string {
     return this._call.inputValues[4].value.toString();
+  }
+
+  get creator(): Address {
+    return this._call.inputValues[5].value.toAddress();
   }
 }
 
